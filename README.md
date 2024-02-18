@@ -14,10 +14,12 @@
     - 顔認証
 
 - [生体認証ダイアログを表示する](https://developer.android.com/training/sign-in/biometric-auth)
+  - 生体認証ライブラリ
+    - [androidx.biometric](https://developer.android.com/reference/androidx/biometric/package-summary?_gl=1*lehptw*_up*MQ..*_ga*MzkxMjMwNjk4LjE3MDgyNDEyNDQ.*_ga_6HH9YJMN9M*MTcwODI0MTI0NC4xLjAuMTcwODI0MTI1MS4wLjAuMA..)
   - アプリがサポートする認証の種類
   　　-　BIOMETRIC_STRONG
-     - Android CDD で定義されているクラス 3 (以前はStrong)の要件を満たす、または超えるデバイス上の生体認証 (指紋、虹彩、顔など) 。
+     - Android CDD で定義されているクラス3の要件を満たす、または超えるデバイス上の生体認証 (指紋、虹彩、顔など) 
    - BIOMETRIC_WEAK
-     - Android CDD で定義されているクラス 2 (以前のWeak)の要件を満たす、または超えるデバイス上の生体認証 (指紋、虹彩、顔など) 。
+     - Android CDD で定義されているクラス2の要件を満たす、または超えるデバイス上の生体認証 (指紋、虹彩、顔など) 
    - DEVICE_CREDENTIAL
-     - デバイスを保護するために使用される非生体認証資格情報 (つまり、PIN、パターン、またはパスワード)。
+     - デバイスを保護するために使用される非生体認証資格情報 (PIN、パターン、またはパスワード)
