@@ -2,6 +2,7 @@
 
 ## 前提
 - Android 9 以上を対象
+- 言語はKotlin
 - UIはJetpack Compose
 
 
