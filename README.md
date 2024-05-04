@@ -33,11 +33,9 @@
 
 #### メモ
 - [BiometricPrompt](https://developer.android.com/reference/android/hardware/biometrics/BiometricPrompt?_gl=1*1x9cp68*_up*MQ..*_ga*MzkxMjMwNjk4LjE3MDgyNDEyNDQ.*_ga_6HH9YJMN9M*MTcwODI0MTI0NC4xLjAuMTcwODI0MTI5MS4wLjAuMA..)
-  - > Android の生体認証が提供するセキュリティ保証のメリットを活用してもらい、生体認証をアプリに簡単に統合してユーザーの機密データの保護を強化できるようにする
-
-  - > アプリのデベロッパーが方式を意識せずに、さまざまな Android デバイスで生体認証を利用できる
-
-  - > FingerprintManager が非推奨
+  - Android の生体認証が提供するセキュリティ保証のメリットを活用してもらい、生体認証をアプリに簡単に統合してユーザーの機密データの保護を強化できるようにする
+  - アプリのデベロッパーが方式を意識せずに、さまざまな Android デバイスで生体認証を利用できる
+  - FingerprintManager が非推奨
 
 - [BiometricManager](https://developer.android.com/reference/androidx/biometric/BiometricManager?_gl=1*1x9cp68*_up*MQ..*_ga*MzkxMjMwNjk4LjE3MDgyNDEyNDQ.*_ga_6HH9YJMN9M*MTcwODI0MTI0NC4xLjAuMTcwODI0MTI5MS4wLjAuMA..)
   - Android10から
