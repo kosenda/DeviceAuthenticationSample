@@ -1,4 +1,4 @@
-package ksnd.devicecredentialsample.biometric
+package ksnd.deviceauthenticationsample.biometric
 
 sealed class BiometricError : Error() {
     data object NoHardware : BiometricError()

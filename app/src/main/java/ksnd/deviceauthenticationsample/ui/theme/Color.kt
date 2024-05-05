@@ -1,4 +1,4 @@
-package ksnd.devicecredentialsample.ui.theme
+package ksnd.deviceauthenticationsample.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

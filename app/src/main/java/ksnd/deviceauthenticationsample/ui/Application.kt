@@ -1,4 +1,4 @@
-package ksnd.devicecredentialsample.ui
+package ksnd.deviceauthenticationsample.ui
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

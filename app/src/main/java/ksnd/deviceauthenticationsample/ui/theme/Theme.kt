@@ -1,4 +1,4 @@
-package ksnd.devicecredentialsample.ui.theme
+package ksnd.deviceauthenticationsample.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -28,7 +28,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun DeviceCredentialSampleTheme(
+fun DeviceAuthenticationSampleTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit

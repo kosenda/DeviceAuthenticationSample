@@ -1,4 +1,4 @@
-package ksnd.devicecredentialsample
+package ksnd.deviceauthenticationsample
 
 import org.junit.Test
 

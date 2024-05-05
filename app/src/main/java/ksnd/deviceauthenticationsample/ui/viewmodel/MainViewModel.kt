@@ -1,4 +1,4 @@
-package ksnd.devicecredentialsample.ui.viewmodel
+package ksnd.deviceauthenticationsample.ui.viewmodel
 
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
-import ksnd.devicecredentialsample.biometric.AppBiometricManager
+import ksnd.deviceauthenticationsample.biometric.AppBiometricManager
 import timber.log.Timber
 import javax.inject.Inject
 

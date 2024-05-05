@@ -1,4 +1,4 @@
-package ksnd.devicecredentialsample.biometric
+package ksnd.deviceauthenticationsample.biometric
 
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG

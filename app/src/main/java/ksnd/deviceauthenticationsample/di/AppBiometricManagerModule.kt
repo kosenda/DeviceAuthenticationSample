@@ -1,4 +1,4 @@
-package ksnd.devicecredentialsample.di
+package ksnd.deviceauthenticationsample.di
 
 import android.content.Context
 import androidx.biometric.BiometricManager
@@ -7,7 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import ksnd.devicecredentialsample.biometric.AppBiometricManager
+import ksnd.deviceauthenticationsample.biometric.AppBiometricManager
 import javax.inject.Singleton
 
 @Module
