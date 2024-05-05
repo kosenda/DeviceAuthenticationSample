@@ -70,4 +70,13 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.51.1")
     ksp("com.google.dagger:hilt-android-compiler:2.51.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    // Timber
+    implementation("com.jakewharton.timber:timber:5.0.1")
+
+    // Biometric
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
+    // Lifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 }
