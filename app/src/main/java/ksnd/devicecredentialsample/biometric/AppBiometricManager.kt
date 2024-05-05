@@ -1,19 +1,44 @@
 package ksnd.devicecredentialsample.biometric
 
 import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
+import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
+import androidx.biometric.BiometricPrompt
+import androidx.fragment.app.FragmentActivity
+import timber.log.Timber
 import javax.inject.Inject
 
+/**
+ * デバイス認証を行う
+ *
+ * @param biometricManager BiometricManager
+ */
 class AppBiometricManager @Inject constructor(
-    private val biometricManager: BiometricManager
+    private val biometricManager: BiometricManager,
 ) {
+    /**
+     * デバイス認証を行う
+     *
+     * @param fragmentActivity FragmentActivity
+     * @param onSucceeded 認証成功時の処理
+     */
+    fun authenticateDevice(
+        fragmentActivity: FragmentActivity,
+        onSucceeded: () -> Unit,
+    ) {
+        checkAvailableAuthenticate()
 
-    fun authenticateDevice() {
-        checkAvailableAuthenticate(AuthenticatorType.BIOMETRIC_STRONG)
-        // TODO 認証の続きをする
+        showAuthenticationDialog(
+            fragmentActivity = fragmentActivity,
+            onSucceeded = onSucceeded,
+        )
     }
 
-    private fun checkAvailableAuthenticate(type: AuthenticatorType) {
-        val result = biometricManager.canAuthenticate(type.value)
+    /**
+     * デバイス認証が利用可能かチェックする
+     */
+    private fun checkAvailableAuthenticate() {
+        val result = biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
         if (result == BiometricManager.BIOMETRIC_SUCCESS) return
 
         when (result) {
@@ -25,10 +50,43 @@ class AppBiometricManager @Inject constructor(
             else -> throw BiometricError.Unknown
         }
     }
-}
 
-enum class AuthenticatorType(val value: Int) {
-    BIOMETRIC_STRONG(BiometricManager.Authenticators.BIOMETRIC_STRONG),
-    BIOMETRIC_WEAK(BiometricManager.Authenticators.BIOMETRIC_WEAK),
-    DEVICE_CREDENTIAL(BiometricManager.Authenticators.DEVICE_CREDENTIAL),
+    /**
+     * 認証ダイアログを表示し認証を行う
+     *
+     * @param fragmentActivity FragmentActivity
+     * @param onSucceeded 認証成功時の処理
+     */
+    private fun showAuthenticationDialog(
+        fragmentActivity: FragmentActivity,
+        onSucceeded: () -> Unit,
+    ) {
+        val biometricPrompt = BiometricPrompt(
+            fragmentActivity,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                    Timber.d("onAuthenticationError errorCode: $errorCode, errString: $errString")
+                    super.onAuthenticationError(errorCode, errString)
+                }
+
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    Timber.d("onAuthenticationSucceeded")
+                    onSucceeded()
+                    super.onAuthenticationSucceeded(result)
+                }
+
+                override fun onAuthenticationFailed() {
+                    Timber.d("onAuthenticationFailed")
+                    super.onAuthenticationFailed()
+                }
+            },
+        )
+
+        val promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("デバイス認証")
+            .setAllowedAuthenticators(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
+            .build()
+
+        biometricPrompt.authenticate(promptInfo)
+    }
 }

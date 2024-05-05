@@ -1,5 +1,11 @@
 package ksnd.devicecredentialsample.ui.screen
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,10 +21,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ksnd.devicecredentialsample.biometric.BiometricError
 import ksnd.devicecredentialsample.ui.viewmodel.AuthenticateDeviceState
@@ -39,9 +48,11 @@ fun MainScreen(viewModel: MainViewModel) {
 @Composable
 private fun MainScreenContent(
     state: MainUiState,
-    authenticateDevice: () -> Unit,
+    authenticateDevice: (FragmentActivity) -> Unit,
     resetAuthenticateDeviceState: () -> Unit,
 ) {
+    val fragmentActivity = LocalContext.current as FragmentActivity
+
     Surface(
         modifier = Modifier
             .padding(horizontal = 16.dp)
@@ -63,7 +74,7 @@ private fun MainScreenContent(
                     modifier = Modifier
                         .weight(1f)
                         .padding(all = 16.dp),
-                    onClick = authenticateDevice,
+                    onClick = { authenticateDevice(fragmentActivity) },
                 ) {
                     Text(
                         text = "デバイス認証",
@@ -84,11 +95,20 @@ private fun MainScreenContent(
                 }
             }
 
-            if (state.authenticateDeviceState is AuthenticateDeviceState.Success) {
-                Text(
-                    text = "認証成功",
-                    style = MaterialTheme.typography.bodyMedium,
-                )
+            AnimatedVisibility(
+                visible = state.authenticateDeviceState is AuthenticateDeviceState.Success,
+                enter = scaleIn(animationSpec = spring()),
+                exit = fadeOut(),
+            ) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        text = "デバイス認証成功",
+                        style = MaterialTheme.typography.headlineSmall,
+                    )
+                }
             }
         }
     }
@@ -97,7 +117,10 @@ private fun MainScreenContent(
         AlertDialog(
             onDismissRequest = resetAuthenticateDeviceState,
             confirmButton = {
-                Text("Close")
+                Text(
+                    text = "Close",
+                    modifier = Modifier.clickable(onClick = resetAuthenticateDeviceState)
+                )
             },
             text = {
                 Text(
@@ -112,7 +135,7 @@ private fun MainScreenContent(
 private fun Throwable.errorMessage(): String {
     return when (this) {
         BiometricError.NoHardware -> "デバイスに生体認証機能がありません"
-        BiometricError.NoneEnrolled -> "生体認証が登録されていません"
+        BiometricError.NoneEnrolled -> "デバイス認証が登録されていません"
         BiometricError.HardwareUnavailable -> "生体認証機能が利用できません"
         BiometricError.SecurityUpdateRequired -> "生体認証機能のセキュリティ更新が必要です"
         BiometricError.Unsupported -> "生体認証機能がサポートされていません"
