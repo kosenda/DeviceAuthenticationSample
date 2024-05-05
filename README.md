@@ -1,12 +1,15 @@
-> [!IMPORTANT] 
-> 作成途中です
-
 # Android端末でのデバイス認証の学習用のサンプルレポジトリ
 
 ## 前提
 - Android 9 以上を対象
 - 言語はKotlin
 - UIはJetpack Compose
+ 
+
+## イメージ
+|デバイス認証前|デバイス認証後|
+|---|---|
+|<img src="https://github.com/kosenda/DeviceCredentialSample/assets/60963155/6f98f8e4-258d-400f-b89d-c53ee81e1fd3" width="250">|<img src="https://github.com/kosenda/DeviceCredentialSample/assets/60963155/75a1f045-497f-4dee-8765-a5537f961703" width="250">|
 
 
 ## 参考資料
