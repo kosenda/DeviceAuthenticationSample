@@ -1,5 +1,6 @@
 package ksnd.devicecredentialsample.ui.viewmodel
 
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -8,6 +9,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import ksnd.devicecredentialsample.biometric.AppBiometricManager
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,12 +30,14 @@ class MainViewModel @Inject constructor(
         initialValue = MainUiState(),
     )
 
-    fun authenticateDevice() {
+    fun authenticateDevice(fragmentActivity: FragmentActivity) {
         runCatching {
-            appBiometricManager.authenticateDevice()
-        }.onSuccess {
-            authenticateDeviceState.value = AuthenticateDeviceState.Success
+            appBiometricManager.authenticateDevice(
+                fragmentActivity = fragmentActivity,
+                onSucceeded = { authenticateDeviceState.value = AuthenticateDeviceState.Success },
+            )
         }.onFailure {
+            Timber.e("authenticateDevice onFailure: $it")
             authenticateDeviceState.value = AuthenticateDeviceState.Failure(it)
         }
     }
