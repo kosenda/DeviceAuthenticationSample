@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "DeviceCredentialSample"
+rootProject.name = "DeviceAuthenticationSample"
 include(":app")

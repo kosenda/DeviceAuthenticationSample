@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "ksnd.devicecredentialsample"
+    namespace = "ksnd.deviceauthenticationsample"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "ksnd.devicecredentialsample"
+        applicationId = "ksnd.deviceauthenticationsample"
         minSdk = 28
         targetSdk = 34
         versionCode = 1

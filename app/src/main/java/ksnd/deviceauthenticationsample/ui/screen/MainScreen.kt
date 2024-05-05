@@ -1,4 +1,4 @@
-package ksnd.devicecredentialsample.ui.screen
+package ksnd.deviceauthenticationsample.ui.screen
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.spring
@@ -29,10 +29,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import ksnd.devicecredentialsample.biometric.BiometricError
-import ksnd.devicecredentialsample.ui.viewmodel.AuthenticateDeviceState
-import ksnd.devicecredentialsample.ui.viewmodel.MainUiState
-import ksnd.devicecredentialsample.ui.viewmodel.MainViewModel
+import ksnd.deviceauthenticationsample.biometric.BiometricError
+import ksnd.deviceauthenticationsample.ui.viewmodel.AuthenticateDeviceState
+import ksnd.deviceauthenticationsample.ui.viewmodel.MainUiState
+import ksnd.deviceauthenticationsample.ui.viewmodel.MainViewModel
 
 @Composable
 fun MainScreen(viewModel: MainViewModel) {
