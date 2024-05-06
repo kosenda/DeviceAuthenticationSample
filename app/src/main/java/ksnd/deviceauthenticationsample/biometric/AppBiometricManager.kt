@@ -1,7 +1,9 @@
 package ksnd.deviceauthenticationsample.biometric
 
+import android.os.Build
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_WEAK
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
 import androidx.fragment.app.FragmentActivity
@@ -16,6 +18,15 @@ import javax.inject.Inject
 class AppBiometricManager @Inject constructor(
     private val biometricManager: BiometricManager,
 ) {
+    /**
+     * 利用可能な認証方法
+     */
+    private val authenticators = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R) {
+        BIOMETRIC_STRONG or DEVICE_CREDENTIAL
+    } else {
+        BIOMETRIC_WEAK or DEVICE_CREDENTIAL
+    }
+
     /**
      * デバイス認証を行う
      *
@@ -38,7 +49,7 @@ class AppBiometricManager @Inject constructor(
      * デバイス認証が利用可能かチェックする
      */
     private fun checkAvailableAuthenticate() {
-        val result = biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
+        val result = biometricManager.canAuthenticate(authenticators)
         if (result == BiometricManager.BIOMETRIC_SUCCESS) return
 
         when (result) {
@@ -84,7 +95,7 @@ class AppBiometricManager @Inject constructor(
 
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("デバイス認証")
-            .setAllowedAuthenticators(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
+            .setAllowedAuthenticators(authenticators)
             .build()
 
         biometricPrompt.authenticate(promptInfo)
